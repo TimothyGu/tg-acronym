@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}[2018/12/01]
+\ProvidesPackage{tg-acronym}[2019/08/06 Small-caps acronym]
+
+\RequirePackage{ltxcmds}
+\RequirePackage{relsize}
+
+\ifdefined\addfontfeature
+\newcommand\@smallnum{\addfontfeature{Numbers=OldStyle}}
+\else
+\newcommand\@smallnum{}
+\fi
+
+\newcommand\acronym[1]{{\@smallnum\scshape\MakeLowercase{#1}}}
+
+\def\<#1>{\protect\ltx@ifnextchar@nospace{s}{\acronym{#1\textsmaller{s}}\protect\@gobble}{\acronym{#1}}}
+\ifdefined\pdfstringdefDisableCommands
+\pdfstringdefDisableCommands{\def\<#1>{#1}}
+\fi
+
+\endinput
